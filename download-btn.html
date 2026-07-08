@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Download Button - ABD Studio</title>
+</head>
+<link rel="stylesheet" href="download-btn.css">
+<body>
+<div class="notification-toast" id="downloadNotification">
+  <div class="toast-icon-box">✓</div>
+  <div class="toast-message">
+    <b>System Notification</b>
+    <span>ABD_CV.pdf downloaded!</span>
+  </div>
+</div>
+
+
+<button class="download-btn" id="downloadBtn">
+  <!-- Initial State: Icon + Text -->
+  <div class="btn-content default-content">
+    <svg class="icon-arrow" viewBox="0 0 24 24">
+      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+    </svg>
+    <span>Download CV</span>
+  </div>
+
+  
+  <div class="btn-content loading-content">
+    <div class="parachute-wrapper">
+      <span class="parachute-icon">🪂</span>
+    </div>
+    <span class="percentage-text">0%</span>
+  </div>
+
+  
+  <div class="btn-content success-content">
+    <svg class="icon-success-svg" viewBox="0 0 52 52">
+      <circle class="success-circle" cx="26" cy="26" r="23" />
+      <path class="success-check" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    </svg>
+    <span>Done!</span>
+  </div>
+</button>
+</body>
+<script src="download-btn.js"></script>
+</html>

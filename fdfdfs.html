@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        :root {
+  --bg-light: #f3f4f6;
+  --bg-dark: #0f172a;
+  --text-light: #1e293b;
+  --text-dark: #f8fafc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.5s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.text {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  font-weight: 700;
+}
+
+#theme-toggle {
+  display: none;
+}
+
+.toggle-slot {
+  position: relative;
+  height: 3.5rem;
+  width: 7.5rem;
+  border: 3px solid #e2e8f0;
+  border-radius: 10rem;
+  border-color: #334155;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.3rem;
+  height: 2.7rem;
+  width: 2.7rem;
+  border-radius: 50%;
+  background-color:#e9ac11; /* Sun background container */
+  box-shadow: 0px 4px 12px rgba(255, 183, 3, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.5s;
+  overflow: hidden;
+}
+
+/* =======================================================
+   ☀️ NEW SLIM & SMALL HAND-DRAWN SUN STYLING
+   ======================================================= */
+.sun-container {
+  position: absolute;
+  width: 3rem;  /* Container size reduced */
+  height: 3rem;
+  transition: transform 0.5s ease, opacity 0.4s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Central Circle - Shrunk and Thin Border */
+.sun-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.9rem;   /* Circle width made small */
+  height: 3.9rem;
+  transform: translate(-50%, -50%);
+  border: 2px solid #ffff; /* Thin white outline like sketch */
+  border-radius: 50%;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.sun-beams {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual Beams - Super Thin and Short Layout */
+.beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #fcf9f9; /* Clean yellow sketch lines */
+  width: 6px;                /* Short length */
+  height: 1.5px;             /* Thin line width */
+  border-radius: 1px;
+  transform-origin: center center;
+}
+
+/* Dynamic positioning for 12 lines around the smaller circle */
+.beam:nth-child(1)  { transform: translate(-50%, -50%) rotate(0deg) translate(9px); }
+.beam:nth-child(2)  { transform: translate(-50%, -50%) rotate(30deg) translate(9px); }
+.beam:nth-child(3)  { transform: translate(-50%, -50%) rotate(60deg) translate(9px); }
+.beam:nth-child(4)  { transform: translate(-50%, -50%) rotate(90deg) translate(9px); }
+.beam:nth-child(5)  { transform: translate(-50%, -50%) rotate(120deg) translate(9px); }
+.beam:nth-child(6)  { transform: translate(-50%, -50%) rotate(150deg) translate(9px); }
+.beam:nth-child(7)  { transform: translate(-50%, -50%) rotate(180deg) translate(9px); }
+.beam:nth-child(8)  { transform: translate(-50%, -50%) rotate(210deg) translate(9px); }
+.beam:nth-child(9)  { transform: translate(-50%, -50%) rotate(240deg) translate(9px); }
+.beam:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg) translate(9px); }
+.beam:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg) translate(9px); }
+.beam:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg) translate(9px); }
+
+
+/* =======================================================
+   🌙 CRESCENT MOON STYLING
+   ======================================================= */
+.icon-moon {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  left: .5rem;
+  box-shadow: 4px 4px 1px 4px #ffffff;
+  transform: rotate(10deg) scale(0);
+  position: absolute;
+  transition: transform 0.5s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+
+
+/* =======================================================
+   🔥 TRANSITION SWITCH LOGIC
+   ======================================================= */
+.page-wrapper:has(#theme-toggle:checked) {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+#theme-toggle:checked ~ .toggle-slot {
+  background-color: #1e293b;
+  border-color: #334155;
+}
+
+#theme-toggle:checked ~ .toggle-slot .toggle-button {
+  transform: translateX(4rem);
+  background-color: #38bdf8; /* Moon blue background container */
+  box-shadow: 0px 4px 15px rgba(56, 189, 248, 0.5);
+}
+
+/* Hide Sun Container on click */
+#theme-toggle:checked ~ .toggle-slot .sun-container {
+  opacity: 0;
+  transform: scale(0) rotate(90deg);
+}
+
+/* Pop Moon on click */
+#theme-toggle:checked ~ .toggle-slot .icon-moon {
+  opacity: 1;
+  transform: rotate(-35deg) scale(1);
+}
+    </style>
+
+  <div class="page-wrapper">
+    <input type="checkbox" id="theme-toggle">
+    
+    <label for="theme-toggle" class="toggle-slot">
+      <div class="toggle-button">
+        
+        <div class="sun-container">
+          <div class="sun-beams">
+            <div class="beam"></div> <div class="beam"></div>
+            <div class="beam"></div> <div class="beam"></div>
+            <div class="beam"></div> <div class="beam"></div>
+            <div class="beam"></div> <div class="beam"></div>
+            <div class="beam"></div> <div class="beam"></div>
+            <div class="beam"></div> <div class="beam"></div>
+          </div>
+          <div class="sun-center"></div>
+        </div>
+
+        <div class="icon-moon"></div>
+        
+      </div>
+    </label>
+
+    <h1 class="text">ABD Studio</h1>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #181A20; /* Binance Dark Theme */
+}
+
+.binance-loader {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  animation: rotateLoader 3.5s infinite ease-in-out;
+}
+
+.square {
+  width: 30px;
+  height: 30px;
+  background-color: #F3BA2F; /* Binance Yellow */
+  position: absolute;
+  border-radius: 4px;
+  animation: mergeSquares 1.5s infinite ease-in-out alternate;
+}
+
+/* Positioning each square to form a larger square/diamond */
+.square:nth-child(1) { top: 0; left: 0; transform-origin: bottom right; }
+.square:nth-child(2) { top: 0; right: 0; transform-origin: bottom left; }
+.square:nth-child(3) { bottom: 0; left: 0; transform-origin: top right; }
+.square:nth-child(4) { bottom: 0; right: 0; transform-origin: top left; }
+
+/* Animation 1: The smooth infinite rotation */
+@keyframes rotateLoader {
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation 2: Squares expanding, contracting, and overlapping */
+@keyframes mergeSquares {
+  0%, 10% {
+    transform: scale(1);
+  }
+  90%, 100% {
+    transform: scale(0.4) rotate(45deg);
+    border-radius: 50%; /* Smoothly turns into circles during merge */
+  }
+}
+</style>
+<body>
+    <div class="binance-loader">
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+  <div class="square"></div>
+</div>
+</body>
+</html>

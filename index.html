@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Glowing-Button-Effect</title> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+<!-- </head>
+<body> -->
+    <!-- <button class="glow-btn">Hover Me</button> -->
+     <!-- <div id="greeting-display"></div>
+</body>
+<script src="index.js"></script>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-image: url('computer.png');
+    background-size: cover;
+    background-position: center; /* Added for better mobile cropping */
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    position: relative;
+    overflow: hidden; /* Prevents accidental scrollbars */
+  }
+
+  .clock-container {
+    position: absolute;
+    top: 5%;    /* Use percentages for better scaling */
+    left: 5%;
+    padding: 20px 25px;
+    backdrop-filter: blur(8px);
+    /* background: rgba(0, 0, 0, 0.15); */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    max-width: 90%; /* Ensures it doesn't overflow the screen width */
+    box-sizing: border-box;
+  }
+
+  #greeting {
+    font-size: 1.25rem;
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #030500;
+  }
+
+  #time {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+  }
+
+  #seconds {
+    font-size: 1.5rem;
+    color: #7c899b;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    margin-left: 10px;
+  }
+
+  #date {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    text-align: center;
+    background-color: #7c899b;
+    color: white;
+  }
+
+  @media (max-width: 600px) {
+    .clock-container {
+      top: 20px;
+      left: 20px;
+      padding: 15px;
+      width: auto;
+    }
+
+    #greeting {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    #time {
+      font-size: 2.5rem;
+    }
+
+    #seconds {
+      font-size: 1.2rem;
+    }
+
+    #date {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="clock-container">
+    <div id="greeting"></div>
+    <div id="time-wrapper">
+        <span id="time"></span><span id="seconds"></span>
+    </div>
+    <div id="date"></div>
+  </div>
+
+<script>
+function updateLiveClock() {
+    var today = new Date();
+    
+    // 1. Month Names Array (Saves space over switch statements!)
+    var months = ["January", "February", "March", "April", "May", "June", 
+                  "July", "August", "September", "October", "November", "December"];
+    
+    var month = months[today.getMonth()];
+    var date = today.getDate();
+    var year = today.getFullYear();
+    
+    // 2. Time Logic
+    var hours = today.getHours();
+    var minutes = today.getMinutes();
+    var seconds = today.getSeconds();
+    var ampm = hours >= 12 ? "PM" : "AM";
+
+    // 3. Greeting Logic
+    var greeting = "";
+    if (hours < 12) greeting = "Good Morning";
+    else if (hours < 18) greeting = "Good Afternoon";
+    else if (hours < 21) greeting = "Good Evening";
+    else greeting = "Good Night";
+
+    // 4. Formatting (Leading Zeros)
+    var displayHours = hours % 12  || 12; // Convert to 12-hour format, with 12 instead of 0
+    var displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+
+    // 5. Inject into HTML
+    document.getElementById("greeting").innerText = greeting;
+    document.getElementById("time").innerText = displayHours + ":" + displayMinutes;
+    document.getElementById("seconds").innerText = ":" + displaySeconds + " " + ampm;
+    document.getElementById("date").innerText = month + " " + date + ", " + year;
+}
+
+// Update the clock every 1000ms (1 second)
+setInterval(updateLiveClock, 1000);
+
+// Run it once immediately so the user doesn't see "Loading" for 1 second
+updateLiveClock();
+</script>
+
+</body>
+</html>

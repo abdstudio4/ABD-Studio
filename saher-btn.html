@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Menu Click</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1d1d2e;
+            margin: 0;
+        }
+
+        .circular-menu {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-button {
+            position: relative;
+            width: 60px;
+            height: 60px;
+             left: -12px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 24px;
+            color: #333;
+            transition: 0.5s;
+        }
+
+       
+        .circular-menu.active .main-button {
+            transform: rotate(315deg);
+            background: #ff4757;
+            color: #fff;
+        }
+
+        .menu-items {
+            position: absolute;
+            list-style: none;
+        }
+
+        .menu-items li {
+            position: absolute;
+            transform-origin: 0px; 
+            transition: 0.5s ease;
+            transform: rotate(0deg) translateX(0px); 
+            left: 0.5px; 
+            top: -20px;
+            transition-delay: calc(0.05s * var(--i));
+            pointer-events: none; 
+            opacity: 0;
+        }
+
+   
+        .circular-menu.active .menu-items li {
+            transform: rotate(calc(360deg / 8 * var(--i))) translateX(120px);
+            opacity: 1;
+            pointer-events: auto; 
+        }
+
+        .menu-items li a {
+            display: flex;
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 18px;
+            color: #333;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            transform: rotate(calc(-360deg / 8 * var(--i)));
+            transition: 0.3s;
+        }
+
+        .menu-items li a:hover {
+            background: #ff4757;
+            color: #fff;
+            transform: rotate(calc(-360deg / 8 * var(--i))) scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="circular-menu" id="circularMenu">
+    <div class="main-button" onclick="toggleMenu()">
+        <i class="fa-solid fa-share-nodes"></i>
+    </div>
+    <ul class="menu-items">
+        <li style="--i:0;"><a href="#"><i class="fab fa-x-twitter"></i></a></li>
+        <li style="--i:1;"><a href="#"><i class="fab fa-reddit"></i></a></li>
+        <li style="--i:2;"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+        <li style="--i:3;"><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li style="--i:4;"><a href="#"><i class="fab fa-github"></i></a></li>
+        <li style="--i:5;"><a href="#"><i class="fab fa-youtube"></i></a></li>
+        <li style="--i:6;"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        <li style="--i:7;"><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+    </ul>
+</div>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('circularMenu').classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Direct | Premium Masala</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .product-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <nav class="p-6 bg-red-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wider">SPICE <span class="text-yellow-400">DIRECT</span></h1>
+            <p class="text-sm italic">Asli Masalay, Seedha Ghar Tak</p>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-6">
+        
+        <section id="product-section">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 border-l-4 border-red-600 pl-4">Hamare Masalay</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-grid">
+                </div>
+        </section>
+
+        <section id="order-section" class="hidden max-w-lg mx-auto">
+            <button onclick="showProducts()" class="mb-4 text-red-600 font-semibold flex items-center">
+                ← Back to Products
+            </button>
+            <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Order Details</h2>
+                
+                <form id="order-form">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Product Code</label>
+                            <input type="text" id="p-code" readonly class="w-full p-3 bg-gray-100 border rounded-lg outline-none font-bold text-red-600">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="u-name" required placeholder="Apna naam likhein" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" id="u-phone" required placeholder="03xx-xxxxxxx" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Delivery Address</label>
+                            <textarea id="u-address" required placeholder="Ghar ka mukammal pata" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Quantity (KG/Packets)</label>
+                            <input type="number" id="p-qty" value="1" min="1" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-red-500">
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-red-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-red-700 shadow-lg transition">
+                            Confirm Order via Email
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 1. Data Object (Yahan se products manage honge)
+        const products = [
+            { id: 'Z45', name: 'Lal Mirch Powder', price: '450', img: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=300' },
+            { id: 'K12', name: 'Haldi Powder', price: '320', img: 'https://images.unsplash.com/photo-1615485290382-441e4d0c9cb5?auto=format&fit=crop&w=300' },
+            { id: 'G99', name: 'Garam Masala', price: '600', img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=300' },
+            { id: 'D22', name: 'Dhaniya Powder', price: '280', img: 'https://images.unsplash.com/photo-1608797178974-15b35a6401c2?auto=format&fit=crop&w=300' },
+            // Add more as needed...
+        ];
+
+        // 2. Render Products
+        const grid = document.getElementById('product-grid');
+        products.forEach(p => {
+            grid.innerHTML += `
+                <div class="product-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                    <img src="${p.img}" class="h-48 w-full object-cover">
+                    <div class="p-4">
+                        <span class="text-xs font-bold text-red-500 uppercase">${p.id}</span>
+                        <h3 class="text-xl font-bold text-gray-800">${p.name}</h3>
+                        <p class="text-gray-600 font-semibold mt-1">Rs. ${p.price}</p>
+                        <button onclick="openOrder('${p.id}')" class="w-full mt-4 bg-gray-900 text-white py-2 rounded-lg hover:bg-red-600 transition">
+                            Order Now
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 3. Logic: Order Form Open & Auto-fill Details
+        function openOrder(id) {
+            document.getElementById('product-section').classList.add('hidden');
+            document.getElementById('order-section').classList.remove('hidden');
+            document.getElementById('p-code').value = id;
+
+            // LocalStorage se details uthao
+            document.getElementById('u-name').value = localStorage.getItem('cust_name') || '';
+            document.getElementById('u-phone').value = localStorage.getItem('cust_phone') || '';
+            document.getElementById('u-address').value = localStorage.getItem('cust_address') || '';
+        }
+
+        function showProducts() {
+            document.getElementById('product-section').classList.remove('hidden');
+            document.getElementById('order-section').classList.add('hidden');
+        }
+
+        // 4. Form Submission & Saving to LocalStorage
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Pehle details save karo taake agli baar auto-fill ho
+            localStorage.setItem('cust_name', document.getElementById('u-name').value);
+            localStorage.setItem('cust_phone', document.getElementById('u-phone').value);
+            localStorage.setItem('cust_address', document.getElementById('u-address').value);
+
+            alert('Details Saved! Ab aapka email trigger hoga.');
+            
+            // Yahan wo Email API ka code aayega (Formspree wagera)
+            // Example: window.location.href = "mailto:admin@gmail.com?subject=New Order&body=Code: " + ...
+        });
+    </script>
+</body>
+</html>
