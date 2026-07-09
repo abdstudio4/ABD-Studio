@@ -67,7 +67,7 @@
     </main>
 
     <script>
-        // 1. Data Object (Yahan se products manage honge)
+       
         const products = [
             { id: 'Z45', name: 'Lal Mirch Powder', price: '450', img: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=300' },
             { id: 'K12', name: 'Haldi Powder', price: '320', img: 'https://images.unsplash.com/photo-1615485290382-441e4d0c9cb5?auto=format&fit=crop&w=300' },
@@ -94,13 +94,13 @@
             `;
         });
 
-        // 3. Logic: Order Form Open & Auto-fill Details
+        
         function openOrder(id) {
             document.getElementById('product-section').classList.add('hidden');
             document.getElementById('order-section').classList.remove('hidden');
             document.getElementById('p-code').value = id;
 
-            // LocalStorage se details uthao
+            
             document.getElementById('u-name').value = localStorage.getItem('cust_name') || '';
             document.getElementById('u-phone').value = localStorage.getItem('cust_phone') || '';
             document.getElementById('u-address').value = localStorage.getItem('cust_address') || '';
@@ -111,19 +111,17 @@
             document.getElementById('order-section').classList.add('hidden');
         }
 
-        // 4. Form Submission & Saving to LocalStorage
         document.getElementById('order-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Pehle details save karo taake agli baar auto-fill ho
+           
             localStorage.setItem('cust_name', document.getElementById('u-name').value);
             localStorage.setItem('cust_phone', document.getElementById('u-phone').value);
             localStorage.setItem('cust_address', document.getElementById('u-address').value);
 
             alert('Details Saved! Ab aapka email trigger hoga.');
             
-            // Yahan wo Email API ka code aayega (Formspree wagera)
-            // Example: window.location.href = "mailto:admin@gmail.com?subject=New Order&body=Code: " + ...
+            
         });
     </script>
 </body>

@@ -19,6 +19,9 @@ A collection of modern HTML, CSS, and JavaScript mini projects created for learn
 
 | Project                                 | Status |
 | 🌊 Wavy Loader                            | ✅ |
+| ✍️ Canvas                                 | ✅ |
+| 🎼 Music Player                           | ✅ |
+| 🛒 Shopping-Cart (incomplete)             | 🚧 |
 | 🌙 Dark Mode Toggle                       | ✅ |
 | 📥 Download Button                        | ✅ |
 | 🔗 Radial Share Button                    | ✅ |
@@ -45,4 +48,4 @@ A collection of modern HTML, CSS, and JavaScript mini projects created for learn
 
 ---
 
-⭐ If you like these projects, don't forget to **Star** this repository!
+⭐ If you like these projects, don't forget to **Star** this repository! And stay connected with us for more projects. 🥳

@@ -1,0 +1,35 @@
+
+ :root { --bg: #121212; --panel: #1e1e1e; --accent: #00bcd4; --text: #eee; }
+        body { background-color: var(--bg); color: var(--text); margin: 0; font-family: 'Segoe UI', sans-serif; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Sidebar Styles */
+        #sidebar { width: 280px; background: var(--panel); border-right: 1px solid #333; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box; }
+        h3 { margin-top: 0; color: var(--accent); text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .tool-group { margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        label { display: block; font-size: 13px; color: #aaa; margin-bottom: 8px; font-weight: bold;}
+        
+        /* Buttons */
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { background: #333; border: 1px solid #444; color: white; padding: 10px; border-radius: 6px; cursor: pointer; transition: 0.2s; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        button:hover { background: #444; border-color: #555; }
+        button.active { background: var(--accent); color: #000; font-weight: bold; border-color: var(--accent); }
+        .danger { background: #b71c1c; border-color: #d32f2f; }
+        .danger:hover { background: #d32f2f; }
+        .success { background: #2e7d32; border-color: #388e3c; margin-top: auto;}
+        .success:hover { background: #388e3c; }
+
+        /* Inputs */
+        input[type="color"] { border: none; width: 100%; height: 35px; cursor: pointer; background: none; padding: 0; }
+        input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent); }
+        input[type="file"] { display: none; }
+        .file-label { display: block; background: #333; color: white; padding: 10px; border-radius: 6px; text-align: center; cursor: pointer; border: 1px dashed #555; transition: 0.2s;}
+        .file-label:hover { background: #444; border-color: var(--accent); }
+
+        /* Canvas Area */
+        #canvas-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; background: #000; background-image: radial-gradient(#222 1px, transparent 1px); background-size: 20px 20px; }
+        .canvas-container { box-shadow: 0 10px 50px rgba(0,0,0,0.8); border-radius: 8px; overflow: hidden; }
+        
+        /* Context Menu for Crop */
+        #crop-menu { display: none; position: absolute; background: var(--panel); border: 1px solid #444; border-radius: 4px; z-index: 100; }
+        #crop-menu button { background: none; border: none; width: 100%; justify-content: flex-start; padding: 8px 15px; border-radius: 0;}
+        #crop-menu button:hover { background: #333; }
