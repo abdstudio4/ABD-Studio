@@ -1,0 +1,10 @@
+.div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+height: 50vh;
+width: 50vw;
+transform: translate(-50%, -50%);
+position: absolute;
+}
